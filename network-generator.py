@@ -8,8 +8,8 @@ ip_mgmt_leaf = '192.168.20.121'
 ip_subnet = '10.0.0.0'
 asn_spine = 65101
 asn_leaf = 65201
-spine = 2
-leaf = 6
+spine = 4
+leaf = 8
 spine_downlink_port = 1
 spine_uplink_port = 0
 leaf_uplink_port = 9
@@ -50,7 +50,6 @@ while i <= spine :
 ##START LEAF##
 lo_leaf = netaddr.IPAddress(ip_lo_subnet_leaf)
 mgmt =  netaddr.IPAddress(ip_mgmt_leaf)
-ip = netaddr.IPAddress(ip_subnet) + 1 
 i = 1
 while i <= leaf :
   print ('    leaf'+str(i)+':')
@@ -61,14 +60,16 @@ while i <= leaf :
   print ('        neighbors:')
 
 #start port uplink
+  ip = netaddr.IPAddress(ip_subnet) + 1+2*(i-1)
   lf_up_port = leaf_uplink_port
   j = 1
   while j <=  spine :
     print ('            swp'+str(lf_up_port)+': "'+str(ip)+'/31"')
     j += 1
     lf_up_port += 1
-    ip += 2
+    ip += 2*leaf
 #end port uplink
+
   print ('        peer_port: "swp'+str(leaf_peerlink_port)+'-'+str(leaf_peerlink_port+1)+'"')
   if (i % 2) == 0 :
     print ('        peer_status: "secondary"')
