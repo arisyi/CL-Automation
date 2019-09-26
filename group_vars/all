@@ -1,0 +1,91 @@
+interfaces:
+    spine1:
+        type: "spine"
+        loopback: "10.0.1.1"
+        mgmt: "192.168.20.111"
+        asn: 65101
+        neighbors:
+          swp1: "10.0.0.0/31"
+          swp2: "10.0.0.2/31"
+          swp3: "10.0.0.4/31"
+          swp4: "10.0.0.6/31"
+          swp5: "10.0.0.8/31"
+          swp6: "10.0.0.10/31"
+    spine2:
+        type: "spine"
+        loopback: "10.0.1.2"
+        mgmt: "192.168.20.112"
+        asn: 65102
+        neighbors:
+          swp1: "10.0.0.12/31"
+          swp2: "10.0.0.14/31"
+          swp3: "10.0.0.16/31"
+          swp4: "10.0.0.18/31"
+          swp5: "10.0.0.20/31"
+          swp6: "10.0.0.22/31"
+    leaf1:
+        type: "leaf"
+        loopback: "10.0.3.1"
+        mgmt: "192.168.20.121"
+        asn: 65201
+        neighbors:
+            swp9: "10.0.0.1/31"
+            swp10: "10.0.0.3/31"
+        peer_port: "swp7-8"
+        peer_status: "primary"
+        peer_ip: "192.168.20.122"
+    leaf2:
+        type: "leaf"
+        loopback: "10.0.3.2"
+        mgmt: "192.168.20.122"
+        asn: 65202
+        neighbors:
+            swp9: "10.0.0.5/31"
+            swp10: "10.0.0.7/31"
+        peer_port: "swp7-8"
+        peer_status: "secondary"
+        peer_ip: "192.168.20.121"
+    leaf3:
+        type: "leaf"
+        loopback: "10.0.3.3"
+        mgmt: "192.168.20.123"
+        asn: 65203
+        neighbors:
+            swp9: "10.0.0.9/31"
+            swp10: "10.0.0.11/31"
+        peer_port: "swp7-8"
+        peer_status: "primary"
+        peer_ip: "192.168.20.124"
+    leaf4:
+        type: "leaf"
+        loopback: "10.0.3.4"
+        mgmt: "192.168.20.124"
+        asn: 65204
+        neighbors:
+            swp9: "10.0.0.13/31"
+            swp10: "10.0.0.15/31"
+        peer_port: "swp7-8"
+        peer_status: "secondary"
+        peer_ip: "192.168.20.123"
+    leaf5:
+        type: "leaf"
+        loopback: "10.0.3.5"
+        mgmt: "192.168.20.125"
+        asn: 65205
+        neighbors:
+            swp9: "10.0.0.17/31"
+            swp10: "10.0.0.19/31"
+        peer_port: "swp7-8"
+        peer_status: "primary"
+        peer_ip: "192.168.20.126"
+    leaf6:
+        type: "leaf"
+        loopback: "10.0.3.6"
+        mgmt: "192.168.20.126"
+        asn: 65206
+        neighbors:
+            swp9: "10.0.0.21/31"
+            swp10: "10.0.0.23/31"
+        peer_port: "swp7-8"
+        peer_status: "secondary"
+        peer_ip: "192.168.20.125"

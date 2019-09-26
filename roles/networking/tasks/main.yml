@@ -1,0 +1,21 @@
+# This task configures /etc/network/interfaces on ifupdown2. The variables for
+# which interfaces are neighbors and networks come from the group_vars/all file.
+- name: configure networking
+  nclu:
+      atomic: true
+      description: "configure all the newtorking"
+      template: |
+            add loopback lo ip address {{ interfaces[ansible_hostname].loopback }}/32
+
+            {% for iface in interfaces[ansible_hostname].neighbors %}
+            add interface {{ iface }} ip add {{ interfaces[ansible_hostname].neighbors[iface] }}
+            {% endfor %}
+
+            {% if interfaces[ansible_hostname].type == 'leaf' %}
+            add clag peer sys-mac 44:38:39:FF:01:01 interface {{ interfaces[ansible_hostname].peer_port }} {{ interfaces[ansible_hostname].peer_status }} backup-ip {{ interfaces[ansible_hostname].peer_ip }}
+            add interface peerlink.4094 clag args --backupVrf mgmt
+            {% endif %}
+            add bond peerlink bond mode balance-xor
+            add bgp autonomous-system {{ interfaces[ansible_hostname].asn }}
+            add bgp router-id {{ interfaces[ansible_hostname].loopback }}
+            add bgp network {{ interfaces[ansible_hostname].loopback }}/32
