@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: del configuration
+    command: net del all
+  - name: del interface
+    command: net del interface swp1-10
+  - name: commit
+    command: net commit
+

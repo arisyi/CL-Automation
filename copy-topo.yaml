@@ -1,0 +1,9 @@
+- hosts: all
+  tasks:
+  - name: copy topology
+    copy:
+      src: topology.dot
+      dest: /etc/ptm.d/topology.dot
+  - name: restart service
+    command: systemctl restart ptmd.service
+
