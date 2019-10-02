@@ -1,4 +1,4 @@
-# BizNOS
+# CL-Automation
 Cumulus Linux Generator Ansible for Spine Leaf Clos Network with BGP-EVPN
 
 network-generator.py : generate variable for ansible
